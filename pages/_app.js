@@ -1,7 +1,14 @@
-import '../styles/globals.css'
+import React from "react";
+import Layout from "../components/Layout";
+import "../styles/globals.css";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+// 일종의 root div 같은 느낌
+function _app({ Component, pageProps }) {
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 
-export default MyApp
+export default _app;
