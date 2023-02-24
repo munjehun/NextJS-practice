@@ -10,8 +10,20 @@ function Home() {
   const router = useRouter();
   const [movies, setMovies] = useState([]);
 
-  const onClick = (id, title, poster) => {
-    router.push(`/movies/${title}/${id}`);
+  const onClick = (id, title, poster, overview, average) => {
+    router.push(
+      {
+        //객체정보도 같이 넘겨줄 수 있다.
+        pathname: `/movies/${id}`,
+        query: {
+          title: title,
+          poster: poster,
+          overview: overview,
+          average: average,
+        },
+      },
+      `/movies/${id}`
+    );
   };
 
   useEffect(() => {
@@ -29,24 +41,34 @@ function Home() {
   return (
     <div className="container">
       <Title title="Home" />
+
       {!movies && <h4>로딩</h4>}
+      {/* movies가 없으면 로딩 표시 */}
+
       {movies.map((movie) => (
         <div
           className="movie"
           key={movie.id}
           onClick={() =>
-            onClick(movie.id, movie.original_title, movie.poster_path)
+            onClick(
+              movie.id,
+              movie.original_title,
+              movie.poster_path,
+              movie.overview,
+              movie.vote_average
+            )
           }
         >
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
 
-          <Link href={`/movies/${movie.original_title}/${movie.id}`}>
+          <Link href={`/movies/${movie.id}`}>
             <a>
               <h4>{movie.original_title}</h4>
             </a>
           </Link>
         </div>
       ))}
+
       <style jsx>{`
         .container {
           display: grid;
