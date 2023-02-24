@@ -13,8 +13,9 @@ function Home() {
   const onClick = (id, title, poster, overview, average) => {
     router.push(
       {
-        //객체정보도 같이 넘겨줄 수 있다.
+        // 이동하려는 경로
         pathname: `/movies/${id}`,
+        //객체정보도 같이 넘겨줄 수 있다.
         query: {
           title: title,
           poster: poster,
@@ -22,7 +23,7 @@ function Home() {
           average: average,
         },
       },
-      `/movies/${id}`
+      `/movies/${id}` //query들을 마스킹하고 이 형식대로만 url에 보여준다. 그렇지 않으면 query들이 다 url에 출력된다.
     );
   };
 
