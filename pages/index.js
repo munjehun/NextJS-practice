@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Title from "../components/Title";
 
-// const API_KEY = "07cb1c34c467a9a1c7c1e7fc9de045c8";
+const API_KEY = "07cb1c34c467a9a1c7c1e7fc9de045c8";
 
 function Home() {
   const router = useRouter();
@@ -16,7 +16,9 @@ function Home() {
 
   useEffect(() => {
     (async () => {
-      const data = await fetch(`/api/movies`);
+      const data = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+      );
       const { results } = await data.json();
       // 구조분해 할당으로 data.json().results 를 {results} 로 선언
       console.log(results);
